@@ -6,6 +6,7 @@ const videoGallery = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   text: {
     fontSize: 25,
     color: '#666',

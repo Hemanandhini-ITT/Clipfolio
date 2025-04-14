@@ -7,12 +7,14 @@ const ProfileScreen = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
     gap: 10,
   },
+
   profileImage: {
     width: 60,
     height: 60,
@@ -20,15 +22,18 @@ const ProfileScreen = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#ccc',
   },
+
   profileName: {
     fontSize: 20,
     fontWeight: '600',
   },
+
   tabsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginVertical: 10,
   },
+
   tabButton: {
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -36,13 +41,16 @@ const ProfileScreen = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: 'transparent',
   },
+
   activeTab: {
     borderColor: 'skyblue',
   },
+
   tabText: {
     fontSize: 16,
     fontWeight: '600',
   },
+
   tabContent: {
     marginTop: 10,
   },
