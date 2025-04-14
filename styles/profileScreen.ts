@@ -24,6 +24,28 @@ const ProfileScreen = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
   },
+  tabsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  tabButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginHorizontal: 5,
+    borderBottomWidth: 2,
+    borderColor: 'transparent',
+  },
+  activeTab: {
+    borderColor: 'skyblue',
+  },
+  tabText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  tabContent: {
+    marginTop: 10,
+  },
 });
 
 export default ProfileScreen;

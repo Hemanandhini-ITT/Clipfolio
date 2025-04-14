@@ -5,7 +5,7 @@ import styles from '../styles/videoGallery';
 const VideoGallery = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Video Gallery Coming Soon</Text>
+      <Text style={styles.text}>Videos Coming Soon</Text>
     </View>
   );
 };

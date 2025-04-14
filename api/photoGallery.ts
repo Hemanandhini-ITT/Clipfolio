@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PEXELS_API_KEY = 'dCr3aCtCXyLhVjyxxHShd9VELEGSlBolXTo62KAh5ASnlfsdcXF92aen';
+const PEXELS_API_KEY = 'dCr3aCtCXyLhVjyxxHShd9VELEGSlBolXTo62KAh5Axxxxxxxxxxxxx';
 const PEXELS_API_URL = 'https://api.pexels.com/v1/curated?per_page=90';
 
 interface Photo {

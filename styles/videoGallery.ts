@@ -7,7 +7,7 @@ const videoGallery = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: 25,
     color: '#666',
   },
 });
