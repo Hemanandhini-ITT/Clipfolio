@@ -19,6 +19,24 @@ const photoGallery = StyleSheet.create({
   loader: {
     marginTop: 50,
   },
+
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  fullscreenImage: {
+    width: '100%',
+    height: '100%',
+  },
+
+  backdrop: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
 });
 
 export default photoGallery;

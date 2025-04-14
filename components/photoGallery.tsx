@@ -1,11 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, ActivityIndicator} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  ActivityIndicator,
+  Modal,
+  TouchableOpacity,
+} from 'react-native';
 import styles from '../styles/photoGallery';
 import {fetchPexelsPhotos} from '../api/photoGallery';
 
 const PhotoGallery = () => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPexelsPhotos()
@@ -21,16 +28,32 @@ const PhotoGallery = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {photos.map((url, index) => (
-        <Image
-          key={index}
-          source={{uri: url}}
-          style={styles.image}
-          resizeMode="cover"
-        />
-      ))}
-    </ScrollView>
+    <>
+      <ScrollView contentContainerStyle={styles.container}>
+        {photos.map((url, index) => (
+          <TouchableOpacity key={index} onPress={() => setSelectedPhoto(url)}>
+            <Image
+              source={{uri: url}}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      <Modal visible={!!selectedPhoto} transparent={true} animationType="fade">
+        <TouchableOpacity
+          style={styles.overlay}
+          activeOpacity={1}
+          onPress={() => setSelectedPhoto(null)}>
+          <Image
+            source={{uri: selectedPhoto ?? ''}}
+            style={styles.fullscreenImage}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </Modal>
+    </>
   );
 };
 
