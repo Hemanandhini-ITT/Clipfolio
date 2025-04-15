@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import styles from '../styles/videoGallery';
+import styles from './VideoGallery.styles';
 
 const VideoGallery = () => {
   return (

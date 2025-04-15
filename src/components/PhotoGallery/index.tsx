@@ -1,27 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   Image,
-  ScrollView,
+  FlatList,
   ActivityIndicator,
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import styles from '../styles/photoGallery';
-import {fetchPexelsPhotos} from '../api/photoGallery';
+import styles from './PhotoGallery.styles';
+import {fetchPexelsPhotos} from './PhotoGalleryApi';
 
 const PhotoGallery = () => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchPexelsPhotos()
-      .then(setPhotos)
-      .catch(error => {
-        console.error('Error fetching photos from Pexels:', error);
-      })
-      .finally(() => setLoading(false));
+  const loadPhotos = useCallback(async () => {
+    try {
+      const data = await fetchPexelsPhotos();
+      setPhotos(data);
+    } catch (error) {
+      console.error('Error fetching photos from Pexels:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    loadPhotos().finally(() => setLoading(false));
+  }, [loadPhotos]);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await loadPhotos();
+    setRefreshing(false);
+  };
 
   if (loading) {
     return <ActivityIndicator size="large" style={styles.loader} />;
@@ -29,17 +40,22 @@ const PhotoGallery = () => {
 
   return (
     <>
-      <ScrollView contentContainerStyle={styles.container}>
-        {photos.map((url, index) => (
-          <TouchableOpacity key={index} onPress={() => setSelectedPhoto(url)}>
+      <FlatList
+        data={photos}
+        keyExtractor={item => item}
+        renderItem={({item}) => (
+          <TouchableOpacity onPress={() => setSelectedPhoto(item)}>
             <Image
-              source={{uri: url}}
+              source={{uri: item}}
               style={styles.image}
               resizeMode="cover"
             />
           </TouchableOpacity>
-        ))}
-      </ScrollView>
+        )}
+        contentContainerStyle={styles.container}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+      />
 
       <Modal visible={!!selectedPhoto} transparent={true} animationType="fade">
         <TouchableOpacity
