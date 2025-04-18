@@ -1,0 +1,29 @@
+{
+    "project_info": {
+      "project_number": "835601273202",
+      "project_id": "clipfolio-7f5ca",
+      "storage_bucket": "clipfolio-7f5ca.firebasestorage.app"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:835601273202:android:a99e8706944e8f1e590deb",
+          "android_client_info": {
+            "package_name": "com.clipfolio"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyComc_BzQqOuUriTwH4WjSPNAPD-7PsQ2M"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

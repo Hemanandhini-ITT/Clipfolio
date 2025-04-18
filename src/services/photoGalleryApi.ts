@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {PexelsResponse} from './PhotoGallery.types';
-import {PEXELS_API_KEY, PEXELS_API_URL} from '../../utils/constants';
+import {PexelsResponse} from '../components/PhotoGallery/photoGallery.types';
+import {PEXELS_API_KEY, PEXELS_API_URL} from '../utils/constants';
 
 export const fetchPexelsPhotos = async (): Promise<string[]> => {
   const response = await axios.get<PexelsResponse>(PEXELS_API_URL, {

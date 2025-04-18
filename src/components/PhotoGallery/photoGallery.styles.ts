@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const PhotoGallery = StyleSheet.create({
+const photoGallery = StyleSheet.create({
   container: {
     padding: 10,
     alignItems: 'center',
@@ -39,4 +39,4 @@ const PhotoGallery = StyleSheet.create({
   },
 });
 
-export default PhotoGallery;
+export default photoGallery;

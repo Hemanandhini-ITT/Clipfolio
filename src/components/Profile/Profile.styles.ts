@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const Profile = StyleSheet.create({
+const profile = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -69,4 +69,4 @@ const Profile = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default profile;

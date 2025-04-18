@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const ProfileScreen = StyleSheet.create({
+const homeScreen = StyleSheet.create({
   title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
   container: {
     flexGrow: 1,
@@ -56,4 +56,4 @@ const ProfileScreen = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default homeScreen;
