@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
-const ProfileScreen = () => {
+const HomeScreen = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={Profile} />
@@ -16,4 +16,4 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default HomeScreen;
