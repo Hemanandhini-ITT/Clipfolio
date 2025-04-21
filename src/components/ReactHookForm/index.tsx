@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, ToastAndroid, Platform, Alert, FlatList, View } from 'react-native';
+import { Button, FlatList, View } from 'react-native';
 import TextInputField from '../ReactHookFormInput';
 import { usePersonalDetailsForm } from '../../hooks/useReactHooks';
 import { fieldConfig } from '../../utils/constants';
 import { FormData } from '../ReactHookForm/reactHookForm.types';
 import { styles } from './reactHookForm.styles';
+import { showToast } from '../../utils/toastUtils';
 
 const PersonalDetailsForm = () => {
   const {
@@ -15,11 +16,7 @@ const PersonalDetailsForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log('Form submitted:', data);
-    if (Platform.OS === 'android') {
-      ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
-    } else {
-      Alert.alert('Form Submitted');
-    }
+    showToast('success', 'Form Submitted', 'Your personal details have been saved.');
   };
 
   return (

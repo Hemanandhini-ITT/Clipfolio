@@ -17,7 +17,10 @@ const TextInputField = <T extends FieldValues>({
       control={control}
       render={({field}) => (
         <View style={styles.container}>
-          <Text style={styles.label}>{label}</Text>
+          <Text style={styles.label}>
+            {label}
+            {<Text style={styles.errorText}> *</Text>}
+          </Text>
           <TextInput
             value={field.value?.toString() ?? ''}
             onChangeText={field.onChange}
