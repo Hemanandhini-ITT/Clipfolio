@@ -1,5 +1,12 @@
 import React from 'react';
-import {ScrollView, Button, View, Alert} from 'react-native';
+import {
+  ScrollView,
+  Button,
+  View,
+  ToastAndroid,
+  Platform,
+  Alert,
+} from 'react-native';
 import FormInput from '../FormInput';
 import usePersonalInfoForm from '../../hooks/usePersonalInfoForm';
 import styles from './personalInfo.styles';
@@ -10,7 +17,12 @@ const PersonalInfoForm = () => {
   const handleSubmit = () => {
     const formData = getFormData();
     console.log('Form Data:', formData);
-    Alert.alert('Submitted!');
+
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Submitted!');
+    }
   };
 
   return (

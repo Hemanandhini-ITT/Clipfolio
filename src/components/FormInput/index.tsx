@@ -1,5 +1,5 @@
 import React, {forwardRef, useImperativeHandle, useRef} from 'react';
-import {TextInput, Text, View} from 'react-native';
+import {TextInput, Text, ScrollView} from 'react-native';
 import {useFormInput} from '../../hooks/useFormInput';
 import styles from './formInput.styles';
 import {FormInputHandle, FormInputProps} from './formInput.types';
@@ -16,7 +16,7 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
     }));
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.label}>
           {label}
           {required && <Text style={styles.requiredAsterisk}> *</Text>}
@@ -35,7 +35,7 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
           {...props}
         />
         {showError && <Text style={styles.errorText}>{getErrorMessage()}</Text>}
-      </View>
+      </ScrollView>
     );
   },
 );

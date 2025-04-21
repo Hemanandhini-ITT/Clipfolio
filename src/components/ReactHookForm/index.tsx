@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
-import TextInputField from '../../ReactHookFormInput';
+import { Button, ToastAndroid, Platform, Alert, FlatList, View } from 'react-native';
+import TextInputField from '../ReactHookFormInput';
 import { usePersonalDetailsForm } from '../../hooks/useReactHooks';
 import { fieldConfig } from '../../utils/constants';
 import { FormData } from '../ReactHookForm/reactHookForm.types';
@@ -14,24 +14,33 @@ const PersonalDetailsForm = () => {
   } = usePersonalDetailsForm();
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    Alert.alert('Form Submitted');
+    console.log('Form submitted:', data);
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Form Submitted');
+    }
   };
 
   return (
-    <View style={styles.container}>
-      {fieldConfig.map((field) => (
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={fieldConfig}
+      keyExtractor={(item) => item.name}
+      renderItem={({ item }) => (
         <TextInputField<FormData>
-          key={field.name}
-          name={field.name}
-          label={field.label}
+          name={item.name}
+          label={item.label}
           control={control}
           errors={errors}
         />
-      ))}
-
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-    </View>
+      )}
+      ListFooterComponent={
+        <View>
+          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+        </View>
+      }
+    />
   );
 };
 
