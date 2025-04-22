@@ -2,7 +2,7 @@ import { KeyboardTypeOptions } from 'react-native';
 
 export interface FormData {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   phone: string;
   address: string;

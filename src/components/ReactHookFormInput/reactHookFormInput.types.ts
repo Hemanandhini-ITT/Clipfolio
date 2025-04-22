@@ -7,4 +7,5 @@ export interface TextInputFieldProps<T extends FieldValues> {
   control: Control<T>;
   errors: FieldErrors<T>;
   keyboardType?: KeyboardTypeOptions;
+  required?: boolean;
 }

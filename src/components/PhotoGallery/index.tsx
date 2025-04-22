@@ -17,6 +17,8 @@ const PhotoGallery = () => {
     selectedPhoto,
     setSelectedPhoto,
     handleRefresh,
+    loadMorePhotos,
+    loadingMore,
   } = usePhotoGallery();
 
   if (loading) {
@@ -36,9 +38,13 @@ const PhotoGallery = () => {
             />
           </TouchableOpacity>
         )}
+        keyExtractor={(item, index) => `${item}-${index}`}
         contentContainerStyle={styles.container}
         refreshing={refreshing}
         onRefresh={handleRefresh}
+        onEndReached={loadMorePhotos}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={loadingMore ? <ActivityIndicator style={styles.footercomponent} /> : null}
       />
 
       <Modal visible={!!selectedPhoto} transparent animationType="fade">

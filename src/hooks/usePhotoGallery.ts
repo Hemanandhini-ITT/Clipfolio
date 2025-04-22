@@ -6,24 +6,42 @@ export const usePhotoGallery = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  const loadPhotos = useCallback(async () => {
+  const loadPhotos = useCallback(async (pageToLoad = 1, refresh = false) => {
     try {
-      const data = await fetchPexelsPhotos();
-      setPhotos(data);
+      const newPhotos = await fetchPexelsPhotos(pageToLoad);
+      if (refresh) {
+        setPhotos(newPhotos);
+      } else {
+        setPhotos(prev => [...prev, ...newPhotos]);
+      }
+      setHasMore(newPhotos.length > 0);
     } catch (error) {
       console.error('Error fetching photos from Pexels:', error);
     }
   }, []);
 
   useEffect(() => {
-    loadPhotos().finally(() => setLoading(false));
-  }, [loadPhotos]);
+    loadPhotos(page).finally(() => setLoading(false));
+  }, [page, loadPhotos]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await loadPhotos();
+    setPage(1);
+    await loadPhotos(1, true);
     setRefreshing(false);
+  };
+
+  const loadMorePhotos = async () => {
+    if (loadingMore || !hasMore) return;
+    setLoadingMore(true);
+    const nextPage = page + 1;
+    await loadPhotos(nextPage);
+    setPage(nextPage);
+    setLoadingMore(false);
   };
 
   return {
@@ -33,5 +51,7 @@ export const usePhotoGallery = () => {
     selectedPhoto,
     setSelectedPhoto,
     handleRefresh,
+    loadMorePhotos,
+    loadingMore,
   };
 };

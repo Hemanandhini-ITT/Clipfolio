@@ -9,6 +9,7 @@ const TextInputField = <T extends FieldValues>({
   label,
   control,
   errors,
+  required,
   keyboardType = 'default',
 }: TextInputFieldProps<T>) => {
   return (
@@ -19,7 +20,7 @@ const TextInputField = <T extends FieldValues>({
         <View style={styles.container}>
           <Text style={styles.label}>
             {label}
-            {<Text style={styles.errorText}> *</Text>}
+            {required && <Text style={styles.errorText}> *</Text>}
           </Text>
           <TextInput
             value={field.value?.toString() ?? ''}

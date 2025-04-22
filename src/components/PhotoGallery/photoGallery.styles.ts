@@ -37,6 +37,10 @@ const photoGallery = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+
+  footercomponent: {
+    marginVertical: 16,
+  },
 });
 
 export default photoGallery;

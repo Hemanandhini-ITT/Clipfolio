@@ -30,6 +30,7 @@ const PersonalDetailsForm = () => {
           label={item.label}
           control={control}
           errors={errors}
+          required={item.required}
         />
       )}
       ListFooterComponent={
