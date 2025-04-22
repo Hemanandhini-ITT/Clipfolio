@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const VideoGallery = StyleSheet.create({
+const videoGallery = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -13,4 +13,4 @@ const VideoGallery = StyleSheet.create({
   },
 });
 
-export default VideoGallery;
+export default videoGallery;

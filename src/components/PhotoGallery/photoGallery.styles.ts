@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const PhotoGallery = StyleSheet.create({
+const photoGallery = StyleSheet.create({
   container: {
     padding: 10,
     alignItems: 'center',
@@ -37,6 +37,10 @@ const PhotoGallery = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+
+  footercomponent: {
+    marginVertical: 16,
+  },
 });
 
-export default PhotoGallery;
+export default photoGallery;

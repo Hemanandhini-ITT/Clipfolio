@@ -1,38 +1,25 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React from 'react';
 import {
-  Image,
   FlatList,
   ActivityIndicator,
   Modal,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import styles from './PhotoGallery.styles';
-import {fetchPexelsPhotos} from './PhotoGalleryApi';
+import styles from './photoGallery.styles';
+import { usePhotoGallery } from '../../hooks/usePhotoGallery';
 
 const PhotoGallery = () => {
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
-
-  const loadPhotos = useCallback(async () => {
-    try {
-      const data = await fetchPexelsPhotos();
-      setPhotos(data);
-    } catch (error) {
-      console.error('Error fetching photos from Pexels:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadPhotos().finally(() => setLoading(false));
-  }, [loadPhotos]);
-
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await loadPhotos();
-    setRefreshing(false);
-  };
+  const {
+    photos,
+    loading,
+    refreshing,
+    selectedPhoto,
+    setSelectedPhoto,
+    handleRefresh,
+    loadMorePhotos,
+    loadingMore,
+  } = usePhotoGallery();
 
   if (loading) {
     return <ActivityIndicator size="large" style={styles.loader} />;
@@ -42,7 +29,6 @@ const PhotoGallery = () => {
     <>
       <FlatList
         data={photos}
-        keyExtractor={item => item}
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => setSelectedPhoto(item)}>
             <Image
@@ -52,12 +38,16 @@ const PhotoGallery = () => {
             />
           </TouchableOpacity>
         )}
+        keyExtractor={(item, index) => `${item}-${index}`}
         contentContainerStyle={styles.container}
         refreshing={refreshing}
         onRefresh={handleRefresh}
+        onEndReached={loadMorePhotos}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={loadingMore ? <ActivityIndicator style={styles.footercomponent} /> : null}
       />
 
-      <Modal visible={!!selectedPhoto} transparent={true} animationType="fade">
+      <Modal visible={!!selectedPhoto} transparent animationType="fade">
         <TouchableOpacity
           style={styles.overlay}
           activeOpacity={1}
